@@ -3,6 +3,7 @@ package u7pp;
 public class RecursiveFunctions {
     
     public static double factorial(int n){
+        //change int to double
         double d = n;
         if (d == 0.0 || d == 1.0){
             return 1.0;
@@ -11,9 +12,11 @@ public class RecursiveFunctions {
     }
 
     public static double pow (double b, int p){
+        //power of 0 = 1
         if (p == 0){
             return 1;
         }
+        // power of 1 returns number as is
         if (p == 1){
             return b;
         }
@@ -21,6 +24,7 @@ public class RecursiveFunctions {
     }    
 
     public static int fibonacci(int n){
+        //0 and 1 are the first number in the fibonacci sequence
         if (n <= 1){
             return n;
         }  
@@ -29,9 +33,11 @@ public class RecursiveFunctions {
     }
 
     public static boolean isPalindrome(String s){
+        //if only 1 or 0 string left then it is a palindrome
         if (s.length() == 1 || s.length() == 0){
             return true;
         }
+        //create new string without the first and last term
         if (s.charAt(0) == s.charAt(s.length()-1)){
             String temp = s.substring(1,s.length()-1);
             return isPalindrome(temp);
@@ -83,11 +89,26 @@ public class RecursiveFunctions {
         return -1;
     }
  
+    public static boolean canFlowOffMap(int[][] map, int row, int col){
 
-
-
-    public static void main(String[] args) {
-        System.out.println(isPalindrome("abBa"));
+        //if can go out of bounds return true
+        if(row == map.length-1 || col == map[0].length-1 || row == 0 || col == 0){
+            return true;
+        }
+        //recursion with changed location
+        if (map[row][col] > map[row+1][col]){
+            return canFlowOffMap(map, row + 1, col);
+        }
+        if (map[row][col] > map[row][col+1]){
+            return canFlowOffMap(map, row, col + 1);
+        }
+        if (map[row][col] > map[row-1][col]){
+            return canFlowOffMap(map, row - 1, col);
+        }
+        if (map[row][col] > map[row][col-1]){
+            return canFlowOffMap(map, row, col -1);
+        }
+        return false;
     }
 
 }
