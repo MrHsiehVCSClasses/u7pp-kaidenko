@@ -43,10 +43,10 @@ public class RecursiveFunctions {
 
     public static int nextIsDouble(int[] data, int n){
         if (n == data.length-1 || n == data.length){
-            return n;
+            return 0;
         }
         if (data[n] * 2 == data[n+1]){
-            ;
+            return (nextIsDouble(data, n + 1) +1);
         }
         return nextIsDouble(data, n+1);
     }
