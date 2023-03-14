@@ -96,19 +96,38 @@ public class RecursiveFunctions {
             return true;
         }
         //recursion with changed location
-        if (map[row][col] > map[row+1][col]){
-            return canFlowOffMap(map, row + 1, col);
-        }
-        if (map[row][col] > map[row][col+1]){
-            return canFlowOffMap(map, row, col + 1);
-        }
-        if (map[row][col] > map[row-1][col]){
-            return canFlowOffMap(map, row - 1, col);
-        }
+
+        boolean upResult = false;
+        boolean downResult = false;
+        boolean leftResult = false; 
+        boolean rightResult = false;
+
+        //left
         if (map[row][col] > map[row][col-1]){
-            return canFlowOffMap(map, row, col -1);
+            leftResult = canFlowOffMap(map, row, col - 1);
         }
-        return false;
+
+        //right
+        if (map[row][col] > map[row][col+1]){
+            rightResult = canFlowOffMap(map, row, col + 1);
+        }
+
+        //up
+        if (map[row][col] > map[row-1][col]){
+            upResult = canFlowOffMap(map, row - 1, col);
+        }
+
+        //down
+        if (map[row][col] > map[row+1][col]){
+            downResult = canFlowOffMap(map, row + 1, col);
+        }
+
+        if (upResult == true || downResult == true || leftResult == true || rightResult == true){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
